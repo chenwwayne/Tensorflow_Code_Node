@@ -28,6 +28,7 @@ def weight_variable(shape):
   return tf.Variable(initial)
 
 def bias_variable(shape):
+  #创建一个shape为shape的list，并全用0.1填充
   initial = tf.constant(0.1, shape=shape)
   return tf.Variable(initial)
 
@@ -40,6 +41,10 @@ def conv2d(x, W):
 
 #最大池化函数，将2*2的像素块降为1*1像素块
 def max_pool_2x2(x):
+  #第一个参数value：需要池化的输入，一般池化层接在卷积层后面，所以输入通常是feature map，
+  #依然是[batch, height, width, channels]这样的shape
+  #ksize: 池化窗口的大小，一般是[1, height, width, 1]
+  #tf.nn.max_pool 返回一个tensor，shape仍然是[batch, height, width, channels]这种形式
   return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
                         strides=[1, 2, 2, 1], padding='SAME')  
                         
